@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+	{{ parent() }}
+{% endblock  %}
+
+{% block title %}Squiz{% endblock %}
+
+{% block body %}
+	<link rel="stylesheet" href="{{asset('css/home.css')}}"/>
+	<div class="opener">
+		<div class="image_opener">
+			<img id="brick_image" src="{{ asset('/images/homebrick.png') }}"/>
+		</div>
+		<div class="child text-center">
+			<img class="d-inline-block align-top" height="400" alt="LOGO Squiz" src="{{ asset('/images/longlogo.png') }}"/>
+			<div class="opener_question">
+				<p style="font-size: 50px;">«</p>
+				{% autoescape %}
+					{% set quest = questions[random(1,500)].question|raw %}
+					{% set con = true %}
+					{% for i in 0..10000 %}
+						{% if quest|length > 75 %}
+							{% set quest = questions[random(1,500)].question|raw %}
+						{% endif %}
+					{% endfor %}
+					{{quest|raw}}
+				{% endautoescape %}
+				<p style="font-size: 50px;">»</p>
+			</div>
+			{% if is_granted('ROLE_USER') %}
+				<a href="../creer_salle">
+					<button type="button" class="btn btn-outline col-md-2" style="border-color: #DDDDDD; color: #DDDDDD; margin-bottom: 1em; font-size : 30px; width: 10%; height: 100px;">Jouer</button>
+				</a>
+			{% else %}
+				<a href="../login">
+					<button type="button" class="btn btn-outline col-md-5" style="border-color: #DDDDDD; color: #DDDDDD; margin-top: 5em ;margin-bottom: 1em; font-size : 30px; width: 25%; height: 100px;">Se connecter pour jouer</button>
+				</a>
+			{% endif %}
+			<div>
+				<a href="#informations">
+					<i style="font-size: 50px; margin-top: 2em; color: #eae7de;" class="fas fa-chevron-down"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="global">
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<section id="informations">
+			<div class="text-center">
+				<br><br><br><br>
+				<h2 style="font-size: 50px; color: #eae7de; margin-bottom: 1em;">Quelques informations</h2>
+				<p style="font-size: 25px; color: #eae7de;">
+					SQUIZ est un site de quizz qui se joue seul.
+					<br>
+					Choisissez parmis plus de 500 questions et une vingtaine de thèmes différents !<br>
+					Inscrivez-vous et proposez vos questions pour que d'autre joueurs puissent en profiter !
+				</p>
+			</div>
+
+			<ul class="statistics">
+				<li class="style1">
+					<span class="fas icon fa-dice"></span>
+					<strong>+24 000</strong>
+					parties jouées
+				</li>
+				<li class="style2">
+					<span class="fas icon fa-users"></span>
+					<strong>2500</strong>
+					utilisateurs
+				</li>
+				<li class="style3">
+					<span class="fas icon fa-clipboard-list"></span>
+					<strong>+500</strong>
+					questions
+				</li>
+				<li class="style4">
+					<span class="fas icon fa-list-alt"></span>
+					<strong>23</strong>
+					thèmes
+				</li>
+			</ul>
+			<br>
+			<hr>
+			<div class="text-center">
+				<br><br>
+				<h2 style="font-size: 50px; color: #eae7de; margin-bottom: 1em;">Derniers articles</h2>
+			</div>
+			{% for article in articles %}
+				<a href="{{ path('article_show', {"id": article.id}) }}">
+					{% if loop.index0 % 2 == 0 %}
+						<div class="wrapper" id="article">
+						{% else %}
+							<div class="wrapper" id="article-left">
+							{% endif %}
+							<div class="one">
+								<div class="carte">
+									<div class="image-zoom">
+										<img id="article-img" src={{ vich_uploader_asset(article) }}></img>
+								</div>
+							</div>
+						</div>
+						<div class="two">
+							<h1>{{article.title|striptags|length > 60 ? article.title|striptags|slice(0, 60) ~ '...' : article.title|striptags }}</h1>
+						</div>
+						<div class="three">
+							<p>{{article.description|striptags|length > 300 ? article.description|striptags|slice(0, 300) ~ '...' : article.description|striptags }}</p>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+			<div class="text-center">
+				<a href="../article">
+					<button type="button" class="btn btn-outline col-md-2 " style="border-color: #DDDDDD; color: #DDDDDD;margin-top: 2em ;margin-bottom: 2em">
+						Consulter plus d'articles</button>
+				</a>
+			</div>
+		</div>
+	{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Squiz | Créer un quiz{% endblock %}
+
+{% block navbar %}
+    {{ parent() }}
+{% endblock  %} 
+
+{% block body %}
+<style>
+
+#new{
+    background: #DDDDDD;
+    padding: 2%;
+    margin-top: 4em;
+}
+h1{
+    font-size: 1.6em;
+    color: #181818;
+    text-align:center;
+
+}
+</style>
+<div class="row mt-3 justify-content-center">          
+    <div class="rounded col col-md-6" id="new">
+    <h1>Génerer un quiz</h1>
+        <details>
+        <summary>
+        <h1>Lancer une partie avec paramètres prédéfinis</h1>
+        </summary>
+        <center>
+        <a href="../game?length=5"><button class="btn btn-primary">05 questions</button></a>
+        <a href="../game?length=5&d=0"><button href="" class="btn btn-primary">05 questions faciles</button></a>
+        <a href="../game?length=5&d=1"><button href="" class="btn btn-primary">05 questions moyennes</button></a>
+        <a href="../game?length=5&d=2"><button href="" class="btn btn-primary">05 questions difficiles</button></a>
+        <br>
+        <a href="../game?length=10"><button href="" class="btn btn-primary">10 questions</button></a>
+        <a href="../game?length=10&d=0"><button href="" class="btn btn-primary">10 questions faciles</button></a>
+        <a href="../game?length=10&d=1"><button href="" class="btn btn-primary">10 questions moyennes</button></a>
+        <a href="../game?length=10&d=2"><button href="" class="btn btn-primary">10 questions difficiles</button></a>
+        <br>
+        <a href="../game?length=15"><button href="" class="btn btn-primary">15 questions</button></a>
+        <a href="../game?length=15&d=0"><button href="" class="btn btn-primary">15 questions faciles</button></a>
+        <a href="../game?length=15&d=1"><button href="" class="btn btn-primary">15 questions moyennes</button></a>
+        <a href="../game?length=15&d=2"><button href="" class="btn btn-primary">15 questions difficiles</button></a>
+        <br>
+        <a href="../game?length=20"><button href="" class="btn btn-primary">20 questions</button></a>
+        <a href="../game?length=20&d=0"><button href="" class="btn btn-primary">20 questions faciles</button></a>
+        <a href="../game?length=20&d=1"><button href="" class="btn btn-primary">20 questions moyennes</button></a>
+        <a href="../game?length=20&d=2"><button href="" class="btn btn-primary">20 questions difficiles</button></a>
+        </center>
+        </details>
+
+        <details>
+        <summary>
+        <h1>Lancer une partie avec paramètres définis ci-dessous</h1>
+        </summary>
+        {{ form_start(form) }}
+        {{ include('creer_salle/_formcreersalle.html.twig') }}
+        <button class="btn btn-primary">
+            Jouer
+        </button>
+        {{ form_end(form) }}
+        </details>
+    </div>
+</div>
+{% endblock %}

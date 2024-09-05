@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Squiz{% endblock %}</title>
+        <!-- Axentix CSS minified version -->
+        <!-- Head of your page -->
+        {% block stylesheets %}
+        <link rel="icon" href={{ asset('/images/logo.png') }} />
+        <link rel="stylesheet" href="{{asset('css/style.css')}}" type="text/css">
+        <link rel="stylesheet" href="{{asset('css/bootstrap.rtl.min.css')}}">
+        <link href="{{asset('templates/base.css.twig') }}" type="text/css" rel="stylesheet" />
+        <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap.bundle.js')}}"></script>
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.css">
+        <link rel="stylesheet" href="{{asset('css/fontawesome-all.min.css')}}"/>
+        <link rel="stylesheet" href="{{asset('css/base.css')}}"/>
+        {% endblock %}
+<style>
+
+</style> 
+
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script>
+  const button = document.querySelector('#button');
+  const tooltip = document.querySelector('#tooltip');
+
+  // Pass the button, the tooltip, and some options, and Popper will do the
+  // magic positioning for you:
+  Popper.createPopper(button, tooltip, {
+    placement: 'right',
+  });
+</script>
+    </head>
+    <body>
+
+{% block navbar %}
+
+<div class="bg-container">
+    <div class="bg-scroll">
+    </div>
+</div>
+
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-md bg-faded justify-content-center" style="position: sticky">
+    <div class="navbar-collapse collapse w-50" id="collapsingNavbar3">
+    <a class="navbar-brand " href="/">
+    <img class="d-inline-block align-top" height="50" alt="LOGO Squiz" src="{{ asset('/images/longlogo.png') }}"/>
+    </a>
+    </div>
+
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+        <ul class="navbar-nav w-100 justify-content-center">
+            <li class="nav-item active">
+                <a class="nav-link" href={{path('creer_salle')}}>Générer un quiz</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href={{path('article_path')}}>Articles</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            {% if is_granted('ROLE_USER') %}
+            <li class="nav-item">
+                <a class="nav-link" href={{path('profil')}}>Mon Profil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_logout') }}" style="margin-left: 1em; margin-right: 1em;" title="Se déconnecter"><i class="fas fa-power-off"></i></a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}" title="Se connecter">Se connecter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_register') }}" style="margin-left: 1em; margin-right: 1em;" title="S'inscrire">S'inscrire</a>
+            </li>
+            {% endif %}
+        </ul>           
+    </div>
+</nav>
+{% endblock %}
+{% block body %}
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script></body>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+
+{% endblock %}
+
+{% block footer %}
+<!-- Footer -->
+<footer class="text-center text-muted" style="background-color: rgba(18, 18, 18, 1);">
+  <!-- Section: Social media -->
+  <section
+    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom" style="background-color: rgba(18, 18, 18, 1);"
+  >
+    <!-- Left -->
+    <div class="me-10 d-none d-lg-block">
+      <span style="color: #DDDDDD">Suivez le développement et l'évolution de SQUIZ sur les réseaux sociaux :</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+      <a href="https://example.com" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://youtu.be/dQw4w9WgXcQ" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="https://youtu.be/dQw4w9WgXcQ" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://github.com/Sylver-Wolf/infoL3" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="" style="background-color: rgba(18, 18, 18, 1);">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <img height="100" alt="LOGO Squiz" src="{{ asset('/images/longlogo.png') }}"/>
+          </h6>
+          <p>
+            Site du projet multidisciplinaire du S5 de la licence d'informatique de l'Université de Tours, réalisé par BOUCHER Yohan,
+            COLLOT Adrien, DÉZÉ Raphaël, et MERMOD Benjamin.
+          </p>
+        </div>
+        <!-- Grid column -->
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Liens pratiques
+          </h6>
+          <p>
+            <a href="{{ path('creer_salle') }}" class="text-reset">Jouer</a>
+          </p>
+          <p>
+            <a href="{{ path('article_path') }}" class="text-reset">Article</a>
+          </p>
+          {% if is_granted('ROLE_USER') %}
+          <p>
+            <a href="{{ path('profil') }}" class="text-reset">Profil</a>
+          </p>
+          {% else %}
+          <p>
+            <a href="{{ path('app_login') }}" class="text-reset">Se connecter</a>
+          </p>
+          
+          <p>
+            <a href="{{ path('app_register') }}" class="text-reset">S'inscrire</a>
+          </p>
+          {% endif %}
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4" >
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            NOUS CONTACTER
+          </h6>
+          <p><i class="fas fa-home me-3"></i> Parc Grandmont, Avenue Monge, 37200 Tours</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            squiz-contact@squiz.fr
+          </p>
+          <p><i class="fas fa-phone me-3"></i>  02 47 00 00 00</p>
+          <p><i class="fas fa-print me-3"></i>  02 47 00 00 00</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(18, 18, 18, 1);">
+    © 2021 :
+    <a class="text-reset fw-bold" href="/">SQUIZ</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+{% endblock %}
+</html>

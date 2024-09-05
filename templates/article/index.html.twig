@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Squiz | Article{% endblock %}
+
+{% block navbar %} 
+    {{ parent() }}
+{% endblock  %} 
+{% block body %}
+<style>
+.article_name{
+  padding: 2%;
+  padding-top: 5%;
+  font-size: 1.35em;
+   color: #a8a8a8;
+}
+
+a{
+   text-decoration: none;
+}
+
+#article_img{
+object-position: center;
+  height:256px;
+  width:400px;
+  max-width: 100%;
+  background-size:100%;
+  background-position:center;
+  transition: 1s;
+  border-radius: 5%;
+
+}
+
+.image-zoom {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  transition: transform 0.4s ease-in-out;
+  transform: scale(1);
+  will-change: transform;
+    border-radius: 5%;
+
+}
+
+.carte {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+}
+
+.image-zoom::before {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.article{
+  margin-left: 3%; 
+  margin-right: 3%;
+}
+
+#contenu-article{
+
+    background-color: rgba(24, 24, 24);
+box-shadow: 5px 5px rgba(24, 24, 24, 0.4);;
+  padding-bottom: 5%; 
+  margin-bottom: 5%; 
+}
+
+#contenu-article:hover h1{
+   text-decoration: underline;
+
+}
+#contenu-article:hover .image-zoom {
+  transform: scale(1.1);
+
+}
+
+</style>
+<div class="row mt-3 text-center article">
+        {% for article in articles %}
+        <div class="col col-md-4">
+              <a href="{{ path('article_show', {"id": article.id}) }}">
+          <div class="col-md-12 container rounded" id="contenu-article">
+                <h1 class="article_name">{{article.title|striptags|length > 30 ? article.title|striptags|slice(0, 30) ~ '...' : article.title|striptags }} </h1>
+            <div class="carte">
+            <div class="image-zoom">
+            <img id="article_img" src={{ vich_uploader_asset(article) }}></img>
+          </div>
+          </div>
+            <div class="btn-group"style="margin: 2%;">
+            {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('article_edit', {"id": article.id}) }}" class="btn btn-outline-secondary">Editer</a>
+            <a href="{{ path('article_delete', {"id": article.id}) }}" class="btn btn-outline-secondary" onclick="return confirm('Voulez-vous supprimer cet article ?')">Supprimer</a>
+
+            {% endif %}
+              </a>
+          </div>
+          </div>
+        </div>           
+        {% endfor %}
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="col col-md-4" >
+          <div class="col-md-12 container rounded" style="margin-bottom: 3%; margin-top: 3%;background: rgba(221, 221, 221, 0.5);">
+            </a>
+            <div class="btn-group"style="margin: 2%;">
+            <a href="{{ path('article_new') }}" class="btn btn-outline-primary">Ajouter un article</a>
+          </div>
+        </div> 
+        {% endif %}
+</div>
+{% endblock %}

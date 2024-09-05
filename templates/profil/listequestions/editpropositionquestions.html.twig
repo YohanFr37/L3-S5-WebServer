@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Proposer une question {% endblock %}
+{% block body %}
+<style>
+#new{
+    background: #DDDDDD;
+    padding: 2%;
+}
+h1{
+    font-size: 1.35em;
+    text-align:center;
+}
+form{
+    padding: 3%;
+
+}
+body{
+    margin-left: 3%; 
+    margin-right: 3%;  
+}
+</style>
+<div class="row mt-3 justify-content-center">          
+    <div class="rounded col col-md-6" id="new">
+        <h1>Proposer une question </h1>
+        {{ form_start(form) }}
+        {{ include('profil/_formquestions.html.twig') }}
+        <button class="btn btn-primary">
+            Proposer
+        </button>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

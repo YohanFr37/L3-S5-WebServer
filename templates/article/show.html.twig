@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Squiz | Article{% endblock %}
+
+{% block body %}
+
+<style>
+
+#article{
+    background-color: #292929;
+    margin: 3%;
+    padding:5%
+}
+
+#article2{
+      background-color: #292929;
+    padding-top:2%
+}
+
+.article_title{
+    color: #DDDDDD;
+    font-size: 225%;
+    text-align: justify;
+
+}
+h2{
+    color: #DDDDDD;
+    font-size: 120%;
+    text-align: justify;
+
+}
+
+.para{
+  color: #DDDDDD;
+  padding-top: 3%;
+  text-align: justify;
+  font-size: 1.5em;
+}
+.small {
+    font-size: 15%;
+}
+
+#article_img{
+object-position: center;
+  height:720px;
+  width:1280px;
+  max-width: 100%;
+  margin-top: 3%;
+}
+#image2{
+
+  height:256px;
+  width:400px;
+  max-width: 100%;
+}
+.global{
+    margin-left: 6%;
+    margin-right: 6%;
+}
+</style>
+<div class="global">
+<div class="grid-container" id="article">
+  <div class="item1">    
+    <h1 class="article_title">{{ article.title }}</h1>
+    <small class="text-muted">Date de publication : {{ article.createdAt|date("d/m/Y") }}</small>
+    <img id="article_img" src={{ vich_uploader_asset(article) }}></img>
+    <p class="para">{{ article.description }}</p>  </div>
+
+</div>
+
+<div class="row mt-3 text-center" >
+{% for article_sel in article_list %}
+{% if article_sel.id == article.id %}
+  {% if article_list[loop.index0 -1] is defined %}
+  <div class="col col-md-6">
+    <div class="col-md-12 container rounded" id="article2">
+      <div class="carte">
+        <p class="para">Article précedent</p>
+      </div>
+        <a href="{{ path('article_show', {"id": article_list[loop.index0 -1].id}) }}"></href>
+        <h1 class="article_title">{{article_list[loop.index0 -1].title|striptags|length > 30 ? article_list[loop.index0 -1].title|striptags|slice(0, 30) ~ '...' : article_list[loop.index0 -1].title|striptags }}</h1>
+        <div class="btn-group">
+          </a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+  <div class="col col-md-6">
+  <div class="col-md-12 container rounded" id="article2">
+  <div class="carte">
+  <p class="para">Pas d'article précédent.</p>
+  </div>
+  </div>
+  </div>
+  {% endif %}
+  {% if article_list[loop.index0 +1] is defined %}
+  <div class="col col-md-6">
+    <div class="col-md-12 container rounded" id="article2">
+      <div class="carte">
+        <p class="para">Article suivant</p>
+      </div>
+        <a href="{{ path('article_show', {"id": article_list[loop.index0 +1].id}) }}"></href>
+        <h1 class="article_title">{{article_list[loop.index0 +1].title|striptags|length > 30 ? article_list[loop.index0 +1].title|striptags|slice(0, 30) ~ '...' : article_list[loop.index0 +1].title|striptags }}</h1>
+        <div class="btn-group">
+          </a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+  <div class="col col-md-6">
+  <div class="col-md-12 container rounded" id="article2">
+  <div class="carte">
+  <p class="para">Pas d'article suivant.</p>
+  </div>
+  </div>
+  </div>
+  {% endif %}
+
+{% endif %}
+{% endfor %} 
+</div>
+</div>
+{% endblock %}
+
+

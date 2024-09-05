@@ -1,0 +1,101 @@
+@font-face {
+ font-family: "Beon";
+ src: local({{asset("beon-webfont.woff")}}) format("woff");
+}
+.bg-container /* used for presentation */ {
+    width:200%;
+    height:200%;
+    position:absolute;
+    position: fixed;
+    transform: translate3d(-50%,-50%,0);
+    z-index: -100;
+}
+.bg-scroll {
+    opacity: 1;
+    /* make BG larger than container */
+    height: 100%;
+    width: 100%;
+    background: url("https://zupimages.net/up/21/48/w4zi.jpg") repeat;  
+    animation: backgroundScroll 4s linear infinite;
+    transform: scale(1);
+    filter: invert(0);
+}
+nav {
+    position: sticky; 
+    top: 0;
+    z-index: 10;
+
+}
+
+.global{
+    margin-left: 3%;
+    margin-right: 3%;
+
+}
+
+.btn{
+    background:#22284f;
+    color:#eae7de;
+    -webkit-text-stroke: 0.025em white;
+    border: 2px solid #bab7ae;
+    box-shadow: 7px 7px rgba(24, 24, 24, 0.4);
+}
+
+.btn:hover{
+  -webkit-backface-visibility: hidden;
+  background: linear-gradient(.25turn, #22284f, #532842);
+  color:#eae7de;
+  border: 2px solid #eae7de;
+  
+}
+p{
+  color: #a8a8a8;
+}
+h1{
+  color: #a8a8a8;
+}
+/* unvisited link */
+a:link {
+  color: #a8a8a8;
+}
+
+/* visited link */
+a:visited {
+  color: #a8a8a8;
+}
+
+/* mouse over link */
+a:hover {
+  color: #d8d8d8;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+table{
+    box-shadow: 5px 5px rgba(24, 24, 24, 0.4);
+    background: rgba(168, 168, 168, 0.7);
+}
+
+        @keyframes backgroundScroll {
+            0% {
+            background-position: 0 0;
+        }
+            100% {
+            background-position:-120px -120px;
+        }
+}
+
+section{
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+hr{
+	style="color: #eae7de;
+	height: 5px;
+	margin-bottom: 3em;
+	margin-top: 3em;
+}
